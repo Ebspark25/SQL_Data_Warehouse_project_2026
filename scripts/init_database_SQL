@@ -1,0 +1,27 @@
+purpose of the code is to check if there is a database named datawarehouse before initiating the building of the datawarehouse database 
+with the three schemas: bronze, silver, and gold
+
+
+
+
+USE master;
+        --Drop and recreate the datawarehouse database
+	IF EXISTS (SELECT 1 FROM SYS.database WHERE name = 'datawarehouse ')
+	BEGIN
+	alter database DATAWAREHOUSE set single_user with rollback immediate;
+	drop DATABASE datawarehouse;
+	END; 
+	-----------------------------------------------------------------------
+	--create the database datawarehouse
+	-----------------------------------------------------------------------
+        
+
+	CREATE DATABASE datawarehouse;
+	use datawarehouse;
+	     --Creating schemas
+	CREATE SCHEMA bronze;
+	GO
+	CREATE SCHEMA silver;
+	GO
+	CREATE SCHEMA gold;
+	GO
